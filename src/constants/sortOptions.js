@@ -1,0 +1,1 @@
+export const sortOptions = ["relevance", "release-date", "popularity", "alphabetical"];

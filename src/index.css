@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: rgb(3, 7, 18);
+  color: #f1f1f1;
+  background-size: 10px 10px;
+  background-image: repeating-linear-gradient(45deg, #111821 0, #111821 1px, #030712 0, #030712 50%);
+}
+
+:root {
+  --swiper-theme-color: rgb(220, 38, 38);
+}
+
+.swiper-slide-custom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.swiper-slide-custom img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
