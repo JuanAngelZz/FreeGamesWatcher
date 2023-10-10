@@ -1,25 +1,38 @@
 import { useCallback, useState } from "react";
-import { getGamesSortedBy } from "../selectors/getGamesSortedBy";
+import { searchGames } from "../selectors/searchGames";
 
-export const useGames = (sort = "aplhabetical") => {
-  const [sortBy, setSortBy] = useState(sort);
+export const useGames = (
+  initialLoad = 12,
+  getSort = "alphabetical",
+  getTags = [],
+  getName = ""
+) => {
+  const [sortBy, setSortBy] = useState(getSort);
+  const [tags, setTags] = useState(getTags);
+  const [name, setName] = useState(getName);
 
   const [games, setGames] = useState([]);
 
-  const [load, setLoad] = useState(0);
+  const [load, setLoad] = useState(initialLoad);
 
   const getData = useCallback(async () => {
-    const data = await getGamesSortedBy(sortBy, load);
-    setGames((prevGames) => [...prevGames, ...data]);
-  }, [sortBy, load]);
+    const data = await searchGames(load, sortBy, tags, name);
+    if (data) {
+      return data.length > 0
+        ? setGames(data)
+        : setGames([]);
+    }
+  }, [load, sortBy, tags, name]);
 
   const handleLoadMore = () => {
-    setLoad(games.length);
+    setLoad(load + 12);
   };
 
   const resetGames = () => {
-    setLoad(0);
-    setSortBy(sort);
+    setLoad(initialLoad);
+    setSortBy(getSort);
+    setTags(getTags);
+    setName(getName);
     setGames([]);
   };
 

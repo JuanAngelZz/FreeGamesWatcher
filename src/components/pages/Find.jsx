@@ -1,10 +1,12 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useGames } from "../../hooks/useGames";
 import { genres } from "../../constants/genres";
 import { sortOptions } from "../../constants/sortOptions";
 import { useForm } from "../../hooks/useForm";
 import Select from "../ui/Select";
 import Tag from "../ui/Tag";
+import GamesContainer from "../ui/GamesContainer";
 import queryString from "query-string";
 import { BiSearch } from "react-icons/bi";
 
@@ -22,12 +24,26 @@ const Find = () => {
     useForm({
       name: searchName || "",
       tags: obtainedTags,
-      sort: searchSort || "relevance",
+      sort: searchSort || sortOptions[0],
     });
 
   const { name, tags, sort } = values;
 
-  useEffect(() => {}, [values]);
+  const { games, getData, handleLoadMore, resetGames } = useGames(
+    12,
+    sort,
+    tags,
+    name
+  );
+
+  useEffect(() => {
+    resetGames();
+  }, [searchSort, searchTags, searchName]);
+
+  useEffect(() => {
+    getData();
+    console.log("se ejecuto getdata");
+  }, [getData]);
 
   return (
     <>
@@ -70,8 +86,16 @@ const Find = () => {
             defaultOption={sort}
           />
         </div>
+        <button
+          type="submit"
+          className="flex items-center justify-center gap-2 mx-auto bg-blue-600 px-7 py-3 rounded-full text-white text-lg hover:bg-blue-700 focus:ring-1 focus:ring-offset-1"
+        >
+          <span className="mr-1">Search</span>
+          <BiSearch className="h-5 w-5" />
+        </button>
       </form>
-      <hr />
+      <hr className="mb-8" />
+      <GamesContainer games={games} handleLoadMore={handleLoadMore} />
     </>
   );
 };

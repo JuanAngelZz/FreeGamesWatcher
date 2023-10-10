@@ -1,1 +1,1 @@
-export const sortOptions = ["relevance", "release-date", "popularity", "alphabetical"];
+export const sortOptions = ["relevance", "popularity", "release-date", "alphabetical",];
