@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
+import GameCardTag from "./GameCardTag";
 
 const GameCard = ({ title, thumbnail, description, genre, url, id }) => {
   return (
-    <article className="block max-w-[280px] h-[438px] bg-gray-700 rounded-xl shadow-xl transition-all hover:scale-105 flex-shrink-0">
+    <article className="block max-w-[280px] h-[438px] bg-gray-700 rounded-xl shadow-xl transition-all hover:scale-105 flex-shrink-0 hover:shadow-lg hover:shadow-slate-600">
       <img
         src={thumbnail}
         alt={`${title} thumbnail`}
@@ -18,12 +19,7 @@ const GameCard = ({ title, thumbnail, description, genre, url, id }) => {
           </p>
           <div className="flex items-center mb-2">
             <span className="text-sm text-gray-400 mr-2">Genre:</span>
-            <a
-              href="#"
-              className="inline-block px-2 py-1 rounded bg-gray-600 hover:bg-red-600 transition-all text-xs"
-            >
-              {genre}
-            </a>
+            <GameCardTag genre={genre} />
           </div>
         </div>
         <a

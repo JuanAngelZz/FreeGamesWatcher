@@ -43,12 +43,16 @@ export const useForm = (initialState = {}) => {
     }));
   };
 
+  const updateValues = (newValues) => {
+    setValues(newValues);
+  };
+
   return {
     values,
     handleChange,
     handleSubmit,
     handleAddTags,
     handleCloseTags,
+    updateValues,
   };
 };
-

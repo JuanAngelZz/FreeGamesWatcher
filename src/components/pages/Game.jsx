@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { getGameById } from "../../selectors/getGameById";
-import Slider from "../ui/Slider";
-import SystemRequirements from "../ui/SystemRequirements";
-import GameDescription from "../ui/GameDescription";
-import GameInfo from "../ui/GameInfo";
+import Slider from "../common/Slider";
+import SystemRequirements from "../common/SystemRequirements";
+import GameDescription from "../common/GameDescription";
+import GameInfo from "../common/GameInfo";
 import { PiPaperPlaneRightFill } from "react-icons/pi";
 import { BsFillCaretRightFill } from "react-icons/bs";
 

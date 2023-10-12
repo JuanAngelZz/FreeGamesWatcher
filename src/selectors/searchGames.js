@@ -1,9 +1,23 @@
 import { sortOptions } from "../constants/sortOptions";
 import { genres } from "../constants/genres";
+import { removeDuplicates } from "../helpers/removeDuplicates";
 
 export const searchGames = async (load, sort, tags, name) => {
-  if (!tags.every((t) => genres.includes(t))) {
-    throw new Error("Error obtaining tags");
+
+  const patchedTags = tags.map((t) => {
+    if (t == "arpg" || t == "mmoarpg") {
+      return "action-rpg";
+    }
+    if (t == "card-game") {
+      return "card";
+    }
+    return t;
+  });
+
+  const remDuplicatesTags = removeDuplicates(patchedTags)
+
+  if (!remDuplicatesTags.every((t) => genres.includes(t))) {
+    throw new Error("Error obtaining tags: " + tags);
   }
 
   if (!sortOptions.includes(sort)) {
@@ -12,10 +26,11 @@ export const searchGames = async (load, sort, tags, name) => {
     );
   }
 
-  const searchTags = tags.length > 0 ? tags.join(".") : false;
+  const searchTags = remDuplicatesTags.length > 0 ? remDuplicatesTags.join(".") : false;
 
+  console.log(searchTags);
   const url = searchTags
-    ? `https://free-to-play-games-database.p.rapidapi.com/api/games?platform=pc&category=${searchTags}&sort-by=${sort}`
+    ? `https://free-to-play-games-database.p.rapidapi.com/api/filter?platform=pc&tag=${searchTags}&sort-by=${sort}`
     : `https://free-to-play-games-database.p.rapidapi.com/api/games?platform=pc&sort-by=${sort}`;
 
   const options = {
@@ -31,12 +46,14 @@ export const searchGames = async (load, sort, tags, name) => {
     const games = await response.json();
 
     if (name) {
-      const filterGames = games.filter(({ title }) => title.toLowerCase().includes(name.toLowerCase()))
-      
+      const filterGames = games.filter(({ title }) =>
+        title.toLowerCase().includes(name.toLowerCase())
+      );
+
       return filterGames.slice(0, load);
     }
 
-    return games.slice(0, load)
+    return games.slice(0, load);
   } catch (error) {
     console.error(`Error searchGame: ${error}`);
   }

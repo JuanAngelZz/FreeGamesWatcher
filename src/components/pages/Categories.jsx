@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { useGames } from "../../hooks/useGames";
 import { Navigate, useParams } from "react-router-dom";
 import { sortBy } from "../../helpers/sortBy";
-import Slider from "../ui/Slider";
-import GamesContainer from "../ui/GamesContainer";
+import Slider from "../common/Slider";
+import GamesContainer from "../common/GamesContainer";
 
 const Categories = () => {
   const { category } = useParams();

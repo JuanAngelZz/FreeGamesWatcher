@@ -4,9 +4,9 @@ import { useGames } from "../../hooks/useGames";
 import { genres } from "../../constants/genres";
 import { sortOptions } from "../../constants/sortOptions";
 import { useForm } from "../../hooks/useForm";
-import Select from "../ui/Select";
-import Tag from "../ui/Tag";
-import GamesContainer from "../ui/GamesContainer";
+import Select from "../common/Select";
+import Tag from "../common/Tag";
+import GamesContainer from "../common/GamesContainer";
 import queryString from "query-string";
 import { BiSearch } from "react-icons/bi";
 
@@ -20,7 +20,7 @@ const Find = () => {
 
   const obtainedTags = searchTags ? searchTags.split(".") : [];
 
-  const { values, handleChange, handleSubmit, handleAddTags, handleCloseTags } =
+  const { values, handleChange, handleSubmit, handleAddTags, handleCloseTags, updateValues } =
     useForm({
       name: searchName || "",
       tags: obtainedTags,
@@ -31,18 +31,22 @@ const Find = () => {
 
   const { games, getData, handleLoadMore, resetGames } = useGames(
     12,
-    sort,
-    tags,
-    name
+    searchSort || sort,
+    obtainedTags,
+    searchName
   );
 
   useEffect(() => {
     resetGames();
+    updateValues({
+      name: searchName || "",
+      tags: obtainedTags,
+      sort: searchSort || sortOptions[0],
+    })
   }, [searchSort, searchTags, searchName]);
 
   useEffect(() => {
     getData();
-    console.log("se ejecuto getdata");
   }, [getData]);
 
   return (

@@ -1,4 +1,3 @@
-import Slider from "../ui/Slider";
 
 const Home = () => {
   return (

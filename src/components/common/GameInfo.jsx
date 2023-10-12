@@ -1,3 +1,5 @@
+import GameCardTag from "./GameCardTag";
+
 const GameInfo = ({
   thumbnail,
   title,
@@ -36,15 +38,10 @@ const GameInfo = ({
             {publisher}
           </p>
         </div>
-        <span className="">
-          Genre:
-          <a
-            href="#"
-            className="inline-block p-2 rounded bg-gray-600 hover:bg-red-600 transition-all text-xs ml-4"
-          >
-            {genre}
-          </a>
-        </span>
+        <p>
+          <span className="opacity-50 inline-block mr-4">Genre:</span>
+          {genre && <GameCardTag genre={genre} />}
+        </p>
       </div>
     </div>
   );
