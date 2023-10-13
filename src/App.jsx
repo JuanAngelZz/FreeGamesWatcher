@@ -5,6 +5,8 @@ import Game from "./components/pages/Game";
 import Home from "./components/pages/Home";
 import MainWrapper from "./components/layout/MainWrapper";
 import Navbar from "./components/layout/Navbar";
+import WeeklyGames from "./components/pages/WeeklyGames";
+import WeeklyGame from "./components/pages/WeeklyGame";
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
           <Route path="/categories" element={<Navigate to="/categories/new-games" />} />
           <Route path="/game/:id" element={<Game />} />
           <Route path="/find" element={<Find />} />
+          <Route path="/weekly-games" element={<WeeklyGames />} />
+          <Route path="/weekly-games/:id" element={<WeeklyGame />} />
         </Routes>
       </MainWrapper>
     </>

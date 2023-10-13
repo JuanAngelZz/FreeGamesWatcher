@@ -10,7 +10,7 @@ const GameInfo = ({
   genre,
 }) => {
   return (
-    <div className="bg-slate-800 flex-grow h-[400px] rounded-xl">
+    <div className="bg-slate-800 flex-grow max-h-[400px] max-w-[300px] rounded-xl">
       <img
         src={thumbnail}
         alt={`${title} thumbnail`}

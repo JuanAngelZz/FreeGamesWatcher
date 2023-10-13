@@ -62,7 +62,7 @@ const Navbar = () => {
             </button>
           </li>
           <li>
-            <NavLink to="/week">Weekly Free Games</NavLink>
+            <NavLink to="/weekly-games">Weekly Free Games</NavLink>
           </li>
         </ul>
         <div>

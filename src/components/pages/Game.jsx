@@ -40,12 +40,12 @@ const Game = () => {
   return (
     <>
       {game ? (
-        <section>
+        <>
           <PiPaperPlaneRightFill
             onClick={handleBack}
             className="text-red-600 text-3xl inline-block mr-3 hover:rotate-180 transition-all cursor-pointer relative top-[-6px]"
           />
-          <h1 className="text-3xl mb-8 inline-block">{title}</h1>
+          <h2 className="text-3xl mb-8 inline-block">{title}</h2>
           <div className="flex gap-8 mb-4">
             {screenshots ? (
               <Slider screenshots={screenshots} />
@@ -64,7 +64,7 @@ const Game = () => {
             <BsFillCaretRightFill className="inline text-2xl" />
           </a>
           <GameDescription>{description}</GameDescription>
-        </section>
+        </>
       ) : (
         <Navigate to="/" />
       )}
