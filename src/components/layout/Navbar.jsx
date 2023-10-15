@@ -39,7 +39,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="border-gray-200 bg-gray-900 py-4 px-7">
+    <header className="border-gray-200 bg-gray-900 py-4 px-7 mb-10">
       <nav className="w-full flex items-center justify-between">
         <h1>
           <Link to="/" className="text-2xl font-bold">

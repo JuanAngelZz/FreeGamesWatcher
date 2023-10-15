@@ -28,7 +28,6 @@ export const searchGames = async (load, sort, tags, name) => {
 
   const searchTags = remDuplicatesTags.length > 0 ? remDuplicatesTags.join(".") : false;
 
-  console.log(searchTags);
   const url = searchTags
     ? `https://free-to-play-games-database.p.rapidapi.com/api/filter?platform=pc&tag=${searchTags}&sort-by=${sort}`
     : `https://free-to-play-games-database.p.rapidapi.com/api/games?platform=pc&sort-by=${sort}`;

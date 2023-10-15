@@ -16,7 +16,7 @@ const GiveAwayContainer = ({ games, title, icon }) => {
           spaceBetween={30}
           navigation={games.length > 3 ? true : false}
           modules={[Pagination, Navigation]}
-          className="mySwiper p-4 bg-slate-700 rounded outline outline-1 outline-red-600"
+          className="mySwiper p-4 bg-slate-800 rounded outline outline-1 outline-gray-600"
         >
           {games &&
             games.map(
