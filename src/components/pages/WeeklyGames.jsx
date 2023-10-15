@@ -8,6 +8,7 @@ import {
   SiUbisoft,
   SiBattledotnet,
 } from "react-icons/si";
+import { SlScreenDesktop } from "react-icons/sl"
 import GiveAwayContainer from "../common/GiveAwayContainer";
 
 const WeeklyGames = () => {
@@ -18,6 +19,7 @@ const WeeklyGames = () => {
     origin: [],
     ubisoft: [],
     battle_net: [],
+    other_pc: [],
   });
 
   const [isLoad, setIsLoad] = useState(false);
@@ -31,6 +33,7 @@ const WeeklyGames = () => {
         const originGames = await getGiveAways("origin");
         const ubisoftGames = await getGiveAways("ubisoft");
         const battlenetGames = await getGiveAways("battlenet");
+        const drmFreeGames = await getGiveAways("drm-free");
 
         setGames({
           steam: steamGames,
@@ -39,6 +42,7 @@ const WeeklyGames = () => {
           origin: originGames,
           ubisoft: ubisoftGames,
           battle_net: battlenetGames,
+          other_pc: drmFreeGames,
         });
 
         setIsLoad(true);
@@ -50,53 +54,63 @@ const WeeklyGames = () => {
     getData().catch();
   }, []);
 
+  const { steam, epic, gog, ubisoft, battle_net, origin, other_pc } = games;
+
   return isLoad ? (
     <>
-      {games.steam.length > 0 && (
+      {steam.length > 0 && (
         <GiveAwayContainer
-          games={games.steam}
+          games={steam}
           title="Steam Giveaways"
-          icon={<SiSteam className="mr-2" />}
+          icon={<SiSteam className="mr-3" />}
         />
       )}
 
-      {games.epic.length > 0 && (
+      {epic.length > 0 && (
         <GiveAwayContainer
-          games={games.epic}
+          games={epic}
           title="Epic Games Giveaways"
-          icon={<SiEpicgames className="mr-2" />}
+          icon={<SiEpicgames className="mr-3" />}
         />
       )}
 
-      {games.gog.length > 0 && (
+      {gog.length > 0 && (
         <GiveAwayContainer
-          games={games.gog}
+          games={gog}
           title="GOG.com Giveaways"
-          icon={<SiGogdotcom className="mr-2" />}
+          icon={<SiGogdotcom className="mr-3" />}
         />
       )}
 
-      {games.ubisoft.length > 0 && (
+      {ubisoft.length > 0 && (
         <GiveAwayContainer
-          games={games.ubisoft}
+          games={ubisoft}
           title="Ubisoft Store Giveaways"
-          icon={<SiUbisoft className="mr-2" />}
+          icon={<SiUbisoft className="mr-3" />}
         />
       )}
 
-      {games.battle_net.length > 0 && (
+      {battle_net.length > 0 && (
         <GiveAwayContainer
-          games={games.battle_net}
+          games={battle_net}
           title="Battle.net Giveaways"
-          icon={<SiBattledotnet className="mr-2" />}
+          icon={<SiBattledotnet className="mr-3" />}
         />
       )}
 
-      {games.origin.length > 0 && (
+      {origin.length > 0 && (
         <GiveAwayContainer
-          games={games.origin}
+          games={origin}
           title="Origin Giveaways"
-          icon={<SiOrigin className="mr-2" />}
+          icon={<SiOrigin className="mr-3" />}
+        />
+      )}
+
+      {other_pc.length > 0 && (
+        <GiveAwayContainer
+          games={other_pc}
+          title="DRM-Free PC Games"
+          icon={<SlScreenDesktop className="mr-3" />}
         />
       )}
     </>

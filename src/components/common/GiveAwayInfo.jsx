@@ -6,7 +6,7 @@ const GiveAwayInfo = ({
   worth,
 }) => {
   return (
-    <div className="bg-slate-800 max-h-[400px] max-w-[300px] rounded-xl">
+    <div className="bg-gray-700 max-h-[400px] max-w-[300px] rounded-xl">
       <img
         src={thumbnail}
         alt={`${title} thumbnail`}

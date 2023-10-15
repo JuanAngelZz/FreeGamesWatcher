@@ -28,6 +28,6 @@ body {
   height: 100%;
 }
 
-li a {
+ol li a {
   font-weight: 800;
 }

@@ -8,36 +8,43 @@ const GiveAwayCard = ({
   worth,
   end_date,
 }) => {
+  let justDate = end_date.split(" ").shift();
+
   return (
     <article
       key={id}
       className="w-72 outline outline-4 outline-gray-700 hover:scale-105 transition-all"
     >
-      <img src={thumbnail} alt={`${title} thumbnail`} className="h-40" />
-      <div className="bg-gray-700 p-4">
+      <img
+        src={thumbnail}
+        alt={`${title} thumbnail`}
+        className="h-40"
+        loading="lazy"
+      />
+      <div className="bg-gray-600 h-40 p-4 flex flex-col justify-around">
         <header>
-          <h3 className="text-lg font-bold mb-2">
+          <div className="flex">
+            <span className="text-sm font-bold px-3 py-[2px] mr-4 bg-blue-700 rounded-2xl hover:opacity-80">
+              Free
+            </span>
+            <p className="opacity-90 mr-2 text-sm">Worth:</p>
+            <span className="text-green-600 font-bold text-sm">{worth}</span>
+          </div>
+          <h3 className="text-lg font-semibold my-2">
             <Link to={`/weekly-games/${id}`}>{title}</Link>
           </h3>
         </header>
-        <section className="flex flex-row-reverse items-center justify-between mb-2">
+
+        <footer className="flex justify-between items-center">
+          <small className="text-sm opacity-70">End date: {justDate}</small>
           <a
             href={open_giveaway}
             target="_blank"
             rel="noreferrer"
-            className="py-2 px-4 bg-amber-500 hover:bg-amber-600 text-slate-800 rounded font-semibold transition-all"
+            className="py-2 w-28 text-center bg-amber-500 hover:bg-amber-600 text-slate-800 rounded font-semibold transition-all"
           >
             Claim Now
           </a>
-          <div>
-            <span className="text-green-600">{worth}</span>
-            <span className="text-sm font-bold px-2 py-[2px] ml-2 bg-blue-700 rounded-2xl hover:opacity-80">
-              Free
-            </span>
-          </div>
-        </section>
-        <footer>
-          <p className="text-sm opacity-80">End date: {end_date}</p>
         </footer>
       </div>
     </article>

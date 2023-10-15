@@ -55,7 +55,7 @@ const Find = () => {
         Free Games <span className="text-red-600">Forever</span>
       </h2>
       <form className="w-full px-4 my-10" onSubmit={handleSubmit}>
-        <div className="relative flex max-w-[640px] mx-auto">
+        <fieldset className="relative flex max-w-[640px] mx-auto">
           <input
             type="text"
             name="name"
@@ -67,7 +67,7 @@ const Find = () => {
           <button type="submit">
             <BiSearch className="text-slate-400 h-5 w-5 absolute right-4 top-4 fill-current" />
           </button>
-        </div>
+        </fieldset>
         {tags.length > 0 && (
           <div className="w-full max-w-[800px] mx-auto flex flex-wrap gap-2">
             {tags.map((tag, index) => (
@@ -75,7 +75,7 @@ const Find = () => {
             ))}
           </div>
         )}
-        <div className="mt-4 flex justify-around">
+        <fieldset className="mt-4 flex justify-around">
           <Select
             name="genre"
             labelText="Add Tag:"
@@ -89,7 +89,7 @@ const Find = () => {
             handleChange={handleChange}
             defaultOption={sort}
           />
-        </div>
+        </fieldset>
         <button
           type="submit"
           className="flex items-center justify-center gap-2 mx-auto bg-blue-600 px-7 py-3 rounded-full text-white text-lg hover:bg-blue-700 focus:ring-1 focus:ring-offset-1"

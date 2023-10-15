@@ -8,6 +8,7 @@ const GameCard = ({ title, thumbnail, description, genre, url, id }) => {
         src={thumbnail}
         alt={`${title} thumbnail`}
         className="rounded-t-xl h-[158px]"
+        loading="lazy"
       />
       <div className="h-[280px] flex flex-col justify-between">
         <div className="p-6 max-h-[264px]">

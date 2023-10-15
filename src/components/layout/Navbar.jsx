@@ -1,35 +1,57 @@
-import { useRef, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import NavLink from "./NavLink";
+import { BiSearch, BiSolidCategory, BiSolidGift } from "react-icons/bi";
+import { useForm } from "../../hooks/useForm";
 
 const Navbar = () => {
   const location = useLocation();
-
+  const navigate = useNavigate();
   const dropdown = useRef(null);
 
   const [dropdownIsOpen, setDropdownIsOpen] = useState("");
 
-  const closeDropdown = (e) => {
-    if (
-      dropdown.current &&
-      dropdownIsOpen &&
-      !dropdown.current.contains(e.target)
-    ) {
-      setDropdownIsOpen(false);
-    }
-  };
+  const { values, handleChange } = useForm({ search: "" });
 
-  document.addEventListener("mousedown", closeDropdown);
+  const { search } = values;
+
+  useEffect(() => {
+    const closeDropdown = (e) => {
+      if (
+        dropdown.current &&
+        dropdownIsOpen &&
+        !dropdown.current.contains(e.target)
+      ) {
+        setDropdownIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", closeDropdown);
+
+    return () => {
+      document.removeEventListener("mousedown", closeDropdown);
+    };
+  }, [dropdownIsOpen]);
+
+  const handleSearch = (e, text) => {
+    e.preventDefault()
+    navigate(`/find?name=${text}&tags=&sort=relevance`);
+  };
 
   return (
     <header className="border-gray-200 bg-gray-900 py-4 px-7">
       <nav className="w-full flex items-center justify-between">
-        <Link to="/" className="text-2xl font-bold">
-          FreeGames<span className="text-red-600">Watcher</span>
-        </Link>
+        <h1>
+          <Link to="/" className="text-2xl font-bold">
+            FreeGames<span className="text-red-600">Watcher</span>
+          </Link>
+        </h1>
         <ul className="flex gap-6 items-center">
           <li>
-            <NavLink to="/find">Find</NavLink>
+            <NavLink to="/find">
+              <BiSearch className="inline-block mr-1 relative -top-[2px]" />
+              Find
+            </NavLink>
           </li>
           <li>
             <button
@@ -41,6 +63,7 @@ const Navbar = () => {
               }
               onClick={() => setDropdownIsOpen(!dropdownIsOpen)}
             >
+              <BiSolidCategory className="inline-block mr-1 relative -top-[2px]" />
               Categories
               {dropdownIsOpen && (
                 <div className="dropdown absolute z-10 top-14 bg-gray-800 p-2 rounded-md shadow-md text-white text-start text-xs">
@@ -62,18 +85,26 @@ const Navbar = () => {
             </button>
           </li>
           <li>
-            <NavLink to="/weekly-games">Weekly Free Games</NavLink>
+            <NavLink to="/weekly-games">
+              <BiSolidGift className="inline-block mr-1 relative -top-[2px]" />
+              Weekly Free Games
+            </NavLink>
           </li>
         </ul>
-        <div>
+        <form onSubmit={(e) => handleSearch(e, search)}>
           <input
             type="text"
-            name=""
+            name="search"
             id=""
             placeholder="Search..."
-            className="py-2 px-4 bg-gray-700 rounded-3xl focus:ring-1 focus:ring-blue-900"
+            className="py-2 px-4 border-gray-600 bg-gray-700 rounded-3xl shadow-lg shadow-slate-950 focus:ring-1 focus:ring-blue-900"
+            value={search}
+            onChange={handleChange}
           />
-        </div>
+          <button type="submit">
+            <BiSearch className="text-slate-400 h-5 w-5 absolute top-7 right-10 fill-current" />
+          </button>
+        </form>
       </nav>
     </header>
   );
