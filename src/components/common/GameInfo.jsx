@@ -20,26 +20,26 @@ const GameInfo = ({
         <p className="max-h-[100px] overflow-scroll">{short_description}</p>
         <div>
           <p>
-            <span className="opacity-50 inline-block w-24 mr-4">
+            <span className="opacity-50 inline-block w-24 mr-2">
               Release Date:
             </span>
             {release_date}
           </p>
           <p>
-            <span className="opacity-50 inline-block w-24 mr-4">
+            <span className="opacity-50 inline-block w-24 mr-2">
               Developer:
             </span>
             {developer}
           </p>
           <p>
-            <span className="opacity-50 inline-block w-24 mr-4">
+            <span className="opacity-50 inline-block w-24 mr-2">
               Publisher:
             </span>
             {publisher}
           </p>
         </div>
         <p>
-          <span className="opacity-50 inline-block mr-4">Genre:</span>
+          <span className="opacity-50 inline-block mr-2">Genre:</span>
           {genre && <GameCardTag genre={genre} />}
         </p>
       </div>

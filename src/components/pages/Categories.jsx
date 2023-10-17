@@ -24,7 +24,7 @@ const Categories = () => {
 
   return getSort ? (
     <>
-      <h2 className="text-3xl font-bold mb-12">{getName}</h2>
+      <h1 className="text-3xl font-bold mb-12">{getName}</h1>
       {games.length > 0 ? (
         <Slider id={firstGameId} />
       ) : (

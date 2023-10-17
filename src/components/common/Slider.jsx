@@ -38,7 +38,7 @@ const Slider = ({ id = null, screenshots = [] }) => {
       navigation={true}
       modules={[Pagination, Navigation, Autoplay]}
       autoplay={{ delay: 8000 }}
-      className="mySwiper h-96 w-4/6 flex-shrink-0 mb-8 mx-auto rounded border-slate-700 border-8"
+      className="mySwiper h-96 w-4/6 flex-shrink-0 mb-8 mx-auto rounded border-slate-700 border-8 shadow-lg shadow-slate-700"
     >
       {images.length > 0 ? (
         images.map(({ image }, index) => {

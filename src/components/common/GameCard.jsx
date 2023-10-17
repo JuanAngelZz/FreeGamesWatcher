@@ -3,7 +3,7 @@ import GameCardTag from "./GameCardTag";
 
 const GameCard = ({ title, thumbnail, description, genre, url, id }) => {
   return (
-    <article className="block max-w-[280px] h-[438px] bg-gray-700 rounded-xl shadow-xl transition-all hover:scale-105 flex-shrink-0 hover:shadow-lg hover:shadow-slate-600">
+    <article className="block max-w-[280px] h-[438px] bg-gray-700 rounded-xl shadow-xl transition-all hover:scale-105 flex-shrink-0 hover:shadow-md hover:shadow-slate-600">
       <img
         src={thumbnail}
         alt={`${title} thumbnail`}
