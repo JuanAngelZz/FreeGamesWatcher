@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { getGameById } from "../../selectors/getGameById";
 import Slider from "../common/Slider";
 import SystemRequirements from "../common/SystemRequirements";
@@ -7,6 +7,10 @@ import GameDescription from "../common/GameDescription";
 import GameInfo from "../common/GameInfo";
 import { PiPaperPlaneRightFill } from "react-icons/pi";
 import { BsFillCaretRightFill } from "react-icons/bs";
+import Loading from "../common/Loading";
+import { useGames } from "../../hooks/useGames";
+import GiveAwayContainer from "../common/GiveAwayContainer";
+import GameCard from "../common/GameCard";
 
 const Game = () => {
   let { id } = useParams();
@@ -16,28 +20,43 @@ const Game = () => {
 
   const [game, setGame] = useState({});
 
+  const [isLoad, setIsLoad] = useState(false);
+
   const {
-    id: gameId,
     title,
     description,
+    genre,
     game_url,
     minimum_system_requirements,
     screenshots,
   } = useMemo(() => game, [game]);
 
+  const genreLc = genre ? [genre.toLowerCase()] : [];
+
+  const { games, getData, resetGames } = useGames(6, "relevance", genreLc);
+
   useEffect(() => {
+    setIsLoad(false);
+
     const getGame = async () => {
       const newGame = await getGameById(id);
       setGame(newGame);
     };
 
-    getGame().catch((e) => console.error(`Error: ${e}`));
+    getGame()
+      .then(() => setIsLoad(true))
+      .catch((e) => console.error(`Error: ${e}`));
   }, [id]);
+
+  useEffect(() => {
+    resetGames()
+    getData()
+  }, [genre]);
 
   const { os, processor, memory, graphics, storage } =
     minimum_system_requirements ?? {};
 
-  return (
+  return isLoad ? (
     <>
       {game ? (
         <>
@@ -45,10 +64,15 @@ const Game = () => {
             onClick={handleBack}
             className="text-red-600 text-3xl inline-block mr-3 hover:rotate-180 transition-all cursor-pointer relative top-[-6px]"
           />
-          <h2 className="text-3xl mb-8 inline-block">{title}</h2>
+          <h1 className="text-3xl mb-8 inline-block">{title}</h1>
           <div className="flex gap-8 mb-4">
             {screenshots ? (
-              <Slider screenshots={screenshots} />
+              <Slider
+                screenshots={screenshots}
+                classChild={
+                  "mySwiper h-96 w-4/6 flex-shrink-0 mb-8 mx-auto rounded border-slate-700 border-8 shadow-lg shadow-slate-700"
+                }
+              />
             ) : (
               <span>Cargando...</span>
             )}
@@ -76,15 +100,19 @@ const Game = () => {
         processor={processor}
         storage={storage}
       />
-      <div className="flex justify-between mt-16">
-        <Link to={`/game/${gameId - 1}`} className="p-2 rounded bg-blue-800">
-          Previous Game
-        </Link>
-        <Link to={`/game/${gameId + 1}`} className="p-2 rounded bg-blue-800">
-          Next Game
-        </Link>
-      </div>
+      <br />
+      <br />
+      <br />
+      {games.length > 0 ? (
+        <GiveAwayContainer
+          games={games}
+          title="Similar Games"
+          ChildrenComponent={GameCard}
+        />
+      ) : <Loading>uola</Loading>}
     </>
+  ) : (
+    <Loading>Loading...</Loading>
   );
 };
 

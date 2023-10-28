@@ -6,10 +6,10 @@ import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import { useEffect, useMemo, useState } from "react";
 import { getGameById } from "../../selectors/getGameById";
 import { Link } from "react-router-dom";
-import { BiSolidChevronRight } from "react-icons/bi";
 import { BsFillCaretRightFill } from "react-icons/bs";
+import { getGiveAwayById } from "../../selectors/getGiveAwayById";
 
-const Slider = ({ id = null, screenshots = [] }) => {
+const Slider = ({ id = null, screenshots = [], classChild }) => {
   const [game, setGame] = useState(null);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const Slider = ({ id = null, screenshots = [] }) => {
     [game, screenshots]
   );
 
-  const {title, game_url} = game ?? {};
+  const { title, game_url } = game ?? {};
 
   return (
     <Swiper
@@ -37,8 +37,8 @@ const Slider = ({ id = null, screenshots = [] }) => {
       }}
       navigation={true}
       modules={[Pagination, Navigation, Autoplay]}
-      autoplay={{ delay: 8000 }}
-      className="mySwiper h-96 w-4/6 flex-shrink-0 mb-8 mx-auto rounded border-slate-700 border-8 shadow-lg shadow-slate-700"
+      autoplay={{ delay: 5000 }}
+      className={classChild}
     >
       {images.length > 0 ? (
         images.map(({ image }, index) => {
@@ -48,15 +48,14 @@ const Slider = ({ id = null, screenshots = [] }) => {
                 <img
                   src={image}
                   alt={`screenshoot ${index + 1}`}
-                  className="max-h-64 w-full object-cover hover:scale-105 transition"
+                  className="max-h-64 w-full object-cover"
                 />
-                <div className="bg-gray-700 h-28 w-full flex items-center justify-between">
+                <div className="bg-gray-700 h-2/6 w-full flex items-center justify-between">
                   <Link
                     to={`/game/${id}`}
-                    className="text-3xl font-bold ml-8 inline-flex hover:text-red-600 hover:scale-105 transition"
+                    className="text-3xl w-96 font-bold ml-8 inline-flex hover:text-red-600 transition-all"
                   >
                     {title}
-                    <BiSolidChevronRight className="text-red-600 text-4xl relative top-[2px]" />
                   </Link>
                   <a
                     href={game_url}

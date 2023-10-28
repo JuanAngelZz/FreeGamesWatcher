@@ -1,5 +1,7 @@
 const SystemRequirements = ({ os, processor, memory, graphics, storage }) => {
 
+  const nullMessage = "Not Listed"
+
   return (
     <section>
       <h2 className="my-8 text-center text-3xl">System Requirements</h2>
@@ -9,7 +11,7 @@ const SystemRequirements = ({ os, processor, memory, graphics, storage }) => {
             Operating System
           </div>
           <div className="basis-1/2 border-l border-white p-4 text-lg flex items-center">
-            {os || "No specified"}
+            {os || nullMessage}
           </div>
         </div>
         <div className="border-b border-white flex w-full">
@@ -17,7 +19,7 @@ const SystemRequirements = ({ os, processor, memory, graphics, storage }) => {
             Processor
           </div>
           <div className="basis-1/2 border-l border-white p-4 text-lg flex items-center">
-            {processor || "No specified"}
+            {processor || nullMessage}
           </div>
         </div>
         <div className="border-b border-white flex w-full">
@@ -25,7 +27,7 @@ const SystemRequirements = ({ os, processor, memory, graphics, storage }) => {
             Memory
           </div>
           <div className="basis-1/2 border-l border-white p-4 text-lg flex items-center">
-            {memory || "No specified"}
+            {memory || nullMessage}
           </div>
         </div>
         <div className="border-b border-white flex w-full">
@@ -33,7 +35,7 @@ const SystemRequirements = ({ os, processor, memory, graphics, storage }) => {
             GPU
           </div>
           <div className="basis-1/2 border-l border-white p-4 text-lg flex items-center">
-            {graphics || "No specified"}
+            {graphics || nullMessage}
           </div>
         </div>
         <div className="flex w-full">
@@ -41,7 +43,7 @@ const SystemRequirements = ({ os, processor, memory, graphics, storage }) => {
             Storage
           </div>
           <div className="basis-1/2 border-l border-white p-4 text-lg flex items-center">
-            {storage || "No specified"}
+            {storage || nullMessage}
           </div>
         </div>
       </div>

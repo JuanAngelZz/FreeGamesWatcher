@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useGames } from "../../hooks/useGames";
 import { genres } from "../../constants/genres";
@@ -9,6 +9,7 @@ import Tag from "../common/Tag";
 import GamesContainer from "../common/GamesContainer";
 import queryString from "query-string";
 import { BiSearch } from "react-icons/bi";
+import Loading from "../common/Loading";
 
 const Find = () => {
   const location = useLocation();
@@ -20,12 +21,18 @@ const Find = () => {
 
   const obtainedTags = searchTags ? searchTags.split(".") : [];
 
-  const { values, handleChange, handleSubmit, handleAddTags, handleCloseTags, updateValues } =
-    useForm({
-      name: searchName || "",
-      tags: obtainedTags,
-      sort: searchSort || sortOptions[0],
-    });
+  const {
+    values,
+    handleChange,
+    handleSubmit,
+    handleAddTags,
+    handleCloseTags,
+    updateValues,
+  } = useForm({
+    name: searchName || "",
+    tags: obtainedTags,
+    sort: searchSort || sortOptions[0],
+  });
 
   const { name, tags, sort } = values;
 
@@ -36,24 +43,27 @@ const Find = () => {
     searchName
   );
 
+  const [isLoad, setIsLoad] = useState(false);
+
   useEffect(() => {
+    setIsLoad(false);
     resetGames();
     updateValues({
       name: searchName || "",
       tags: obtainedTags,
       sort: searchSort || sortOptions[0],
-    })
+    });
   }, [searchSort, searchTags, searchName]);
 
   useEffect(() => {
-    getData();
+    getData().then(() => setIsLoad(true));
   }, [getData]);
 
   return (
     <>
-      <h2 className="text-3xl text-center font-bold">
+      <h1 className="text-3xl text-center font-bold">
         Free Games <span className="text-red-600">Forever</span>
-      </h2>
+      </h1>
       <form className="w-full px-4 my-10" onSubmit={handleSubmit}>
         <fieldset className="relative flex max-w-[640px] mx-auto">
           <input
@@ -99,7 +109,11 @@ const Find = () => {
         </button>
       </form>
       <hr className="mb-8" />
-      <GamesContainer games={games} handleLoadMore={handleLoadMore} />
+      {isLoad ? (
+        <GamesContainer games={games} handleLoadMore={handleLoadMore} />
+      ) : (
+        <Loading>Loading...</Loading>
+      )}
     </>
   );
 };

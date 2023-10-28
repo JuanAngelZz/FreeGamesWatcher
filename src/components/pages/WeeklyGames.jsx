@@ -8,8 +8,10 @@ import {
   SiUbisoft,
   SiBattledotnet,
 } from "react-icons/si";
-import { SlScreenDesktop } from "react-icons/sl"
+import { SlScreenDesktop } from "react-icons/sl";
 import GiveAwayContainer from "../common/GiveAwayContainer";
+import GiveAwayCard from "../common/GiveAwayCard";
+import Loading from "../common/Loading";
 
 const WeeklyGames = () => {
   const [games, setGames] = useState({
@@ -63,6 +65,7 @@ const WeeklyGames = () => {
           games={steam}
           title="Steam Giveaways"
           icon={<SiSteam className="mr-3" />}
+          ChildrenComponent={GiveAwayCard}
         />
       )}
 
@@ -71,6 +74,7 @@ const WeeklyGames = () => {
           games={epic}
           title="Epic Games Giveaways"
           icon={<SiEpicgames className="mr-3" />}
+          ChildrenComponent={GiveAwayCard}
         />
       )}
 
@@ -79,6 +83,7 @@ const WeeklyGames = () => {
           games={gog}
           title="GOG.com Giveaways"
           icon={<SiGogdotcom className="mr-3" />}
+          ChildrenComponent={GiveAwayCard}
         />
       )}
 
@@ -87,6 +92,7 @@ const WeeklyGames = () => {
           games={ubisoft}
           title="Ubisoft Store Giveaways"
           icon={<SiUbisoft className="mr-3" />}
+          ChildrenComponent={GiveAwayCard}
         />
       )}
 
@@ -95,6 +101,7 @@ const WeeklyGames = () => {
           games={battle_net}
           title="Battle.net Giveaways"
           icon={<SiBattledotnet className="mr-3" />}
+          ChildrenComponent={GiveAwayCard}
         />
       )}
 
@@ -103,6 +110,7 @@ const WeeklyGames = () => {
           games={origin}
           title="Origin Giveaways"
           icon={<SiOrigin className="mr-3" />}
+          ChildrenComponent={GiveAwayCard}
         />
       )}
 
@@ -111,11 +119,12 @@ const WeeklyGames = () => {
           games={other_pc}
           title="DRM-Free PC Games"
           icon={<SlScreenDesktop className="mr-3" />}
+          ChildrenComponent={GiveAwayCard}
         />
       )}
     </>
   ) : (
-    <span>Obtaining Giveaways...</span>
+    <Loading>Obtaining giveaways...</Loading>
   );
 };
 

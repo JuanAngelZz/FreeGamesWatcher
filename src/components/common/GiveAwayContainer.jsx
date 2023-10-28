@@ -4,10 +4,13 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 
-const GiveAwayContainer = ({ games, title, icon }) => {
+const GiveAwayContainer = ({ games, title, icon, ChildrenComponent, right }) => {
+
+  const classProp = right ? "text-3xl font-bold mb-8 flex items-center justify-end mr-5" : "text-3xl font-bold mb-8 flex items-center ml-5"
+
   return (
     <>
-      <h2 className="text-3xl font-bold mb-8 flex items-center">
+      <h2 className={classProp}>
         {icon} {title}
       </h2>
       <section className="mb-8">
@@ -19,20 +22,11 @@ const GiveAwayContainer = ({ games, title, icon }) => {
           className="mySwiper p-4 bg-slate-800 rounded outline outline-1 outline-gray-600"
         >
           {games &&
-            games.map(
-              ({ id, title, thumbnail, open_giveaway, worth, end_date }) => (
-                <SwiperSlide key={id}>
-                  <GiveAwayCard
-                    id={id}
-                    title={title}
-                    thumbnail={thumbnail}
-                    end_date={end_date}
-                    open_giveaway={open_giveaway}
-                    worth={worth}
-                  />
-                </SwiperSlide>
-              )
-            )}
+            games.map((game) => (
+              <SwiperSlide key={game.id}>
+                <ChildrenComponent {...game} />
+              </SwiperSlide>
+            ))}
         </Swiper>
       </section>
     </>

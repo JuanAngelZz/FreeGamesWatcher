@@ -6,29 +6,14 @@ const GamesContainer = ({ games, handleLoadMore, skipFirst }) => {
     <>
       <section className="flex gap-5 flex-wrap justify-center">
         {games.length > 0 ? (
-          games.map(
-            (
-              { id, title, short_description, genre, thumbnail, game_url },
-              index
-            ) => {
-              if (skipFirst && index === 0) {
-                return null;
-              }
-              return (
-                <GameCard
-                  description={short_description}
-                  title={title}
-                  genre={genre}
-                  thumbnail={thumbnail}
-                  url={game_url}
-                  id={id}
-                  key={id}
-                />
-              );
+          games.map((game, index) => {
+            if (skipFirst && index === 0) {
+              return null;
             }
-          )
+            return <GameCard {...game} key={game.id} />;
+          })
         ) : (
-          <div>Cargando...</div>
+          <div>Not games found</div>
         )}
       </section>
       {games.length >= 12 && (

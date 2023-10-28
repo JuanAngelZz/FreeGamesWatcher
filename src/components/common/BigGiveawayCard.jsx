@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 
-const GiveAwayCard = ({
+const BigGiveAwayCard = ({
   id,
   title,
-  thumbnail,
+  image,
   open_giveaway,
   worth,
   end_date,
@@ -13,12 +13,12 @@ const GiveAwayCard = ({
   return (
     <article
       key={id}
-      className="w-72 outline outline-4 outline-gray-700 hover:scale-105 transition-all hover:shadow-lg hover:shadow-slate-700"
+      className="w-1/2 h-auto outline outline-4 outline-gray-700 hover:scale-105 transition-all hover:shadow-lg hover:shadow-slate-700"
     >
       <img
-        src={thumbnail}
-        alt={`${title} thumbnail`}
-        className="h-40"
+        src={image}
+        alt={`${title} image`}
+        className="w-full"
         loading="lazy"
       />
       <div className="bg-gray-600 h-40 p-4 flex flex-col justify-around">
@@ -51,4 +51,4 @@ const GiveAwayCard = ({
   );
 };
 
-export default GiveAwayCard;
+export default BigGiveAwayCard;

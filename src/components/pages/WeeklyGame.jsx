@@ -4,6 +4,7 @@ import { getGiveAwayById } from "../../selectors/getGiveAwayById";
 import GiveAwayInfo from "../common/GiveAwayInfo";
 import { PiPaperPlaneRightFill } from "react-icons/pi";
 import { FaShoppingCart } from "react-icons/fa";
+import Loading from "../common/Loading";
 
 const WeeklyGame = () => {
   const { id } = useParams();
@@ -13,9 +14,12 @@ const WeeklyGame = () => {
 
   const [giveaway, setGiveaway] = useState({});
 
+  const [isLoad, setIsLoad] = useState(false);
+
   useEffect(() => {
     getGiveAwayById(id).then((g) => {
       setGiveaway(g);
+      setIsLoad(true);
     });
   }, [id]);
 
@@ -24,15 +28,15 @@ const WeeklyGame = () => {
   let arrSplit = instructions ? instructions.split(/\d+\. /) : [];
   arrSplit.shift();
 
-  return (
+  return isLoad ? (
     <div className="flex gap-14 justify-between">
       <section className="flex-grow">
         <div className="flex items-center">
-        <PiPaperPlaneRightFill
-          onClick={handleBack}
-          className="text-red-600 text-3xl mr-3 hover:rotate-180 transition-all cursor-pointer relative top-[-6px]"
-        />
-        <h2 className="text-2xl font-bold mb-4">{title}</h2>
+          <PiPaperPlaneRightFill
+            onClick={handleBack}
+            className="text-red-600 text-3xl mr-3 hover:rotate-180 transition-all cursor-pointer relative top-[-6px]"
+          />
+          <h2 className="text-2xl font-bold mb-4">{title}</h2>
         </div>
         <div className="flex items-center mb-2">
           <span className="bg-blue-700 font-bold py-[2px] px-4 rounded-3xl mr-2 hover:opacity-80">
@@ -46,8 +50,11 @@ const WeeklyGame = () => {
           <ol className="list-decimal px-6 mb-10">
             {arrSplit.length > 0 ? (
               arrSplit.map((i, index) => (
-                <li key={index} className="mb-2" dangerouslySetInnerHTML={{ __html: i }}>
-                </li>
+                <li
+                  key={index}
+                  className="mb-2"
+                  dangerouslySetInnerHTML={{ __html: i }}
+                ></li>
               ))
             ) : (
               <span>Cargando...</span>
@@ -66,6 +73,8 @@ const WeeklyGame = () => {
       </section>
       <GiveAwayInfo {...giveaway} />
     </div>
+  ) : (
+    <Loading>Loading Giveaway...</Loading>
   );
 };
 
