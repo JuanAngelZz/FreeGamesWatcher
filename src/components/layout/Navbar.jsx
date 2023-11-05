@@ -34,18 +34,21 @@ const Navbar = () => {
   }, [dropdownIsOpen]);
 
   const handleSearch = (e, text) => {
-    e.preventDefault()
+    e.preventDefault();
     navigate(`/find?name=${text}&tags=&sort=relevance`);
   };
 
   return (
     <header className="border-gray-200 bg-gray-900 py-4 px-7 mb-10">
       <nav className="w-full flex items-center justify-between">
-        <h1>
-          <Link to="/" className="text-2xl font-bold">
-            FreeGames<span className="text-red-600">Watcher</span>
-          </Link>
-        </h1>
+        <Link to="/" className="text-2xl font-bold flex items-center">
+          <img
+            src="/FGW-logo.png"
+            alt=""
+            className="w-9 mx-2"
+          />
+          FreeGames<span className="text-red-600">Watcher</span>
+        </Link>
         <ul className="flex gap-6 items-center">
           <li>
             <NavLink to="/find">

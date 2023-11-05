@@ -1,5 +1,5 @@
 export const getGiveAways = async (store) => {
-  const url = `https://gamerpower.p.rapidapi.com/api/giveaways?platform=${store}&type=game&sort-by=date`;
+  const url = `https://gamerpower.p.rapidapi.com/api/giveaways?platform=${store}&type=game&sort-by=value`;
   const options = {
     method: "GET",
     headers: {

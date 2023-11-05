@@ -15,7 +15,7 @@ const GameCard = ({ title, thumbnail, short_description, genre, game_url, id }) 
           <Link to={`/game/${id}`}>
             <h3 className="text-2xl mb-2 font-semibold">{title}</h3>
           </Link>
-          <p className="opacity-80 text-sm mb-4 max-h-20 overflow-scroll">
+          <p className="opacity-80 text-sm mb-4 max-h-20 overflow-hidden hover:overflow-y-auto">
             {short_description}
           </p>
           <div className="flex items-center mb-2">

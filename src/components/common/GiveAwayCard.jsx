@@ -21,7 +21,7 @@ const GiveAwayCard = ({
         className="h-40"
         loading="lazy"
       />
-      <div className="bg-gray-600 h-40 p-4 flex flex-col justify-around">
+      <section className="bg-gray-600 h-40 p-4 flex flex-col justify-around">
         <header>
           <div className="flex">
             <span className="text-sm font-bold px-3 py-[2px] mr-4 bg-blue-700 rounded-2xl hover:opacity-80">
@@ -46,7 +46,7 @@ const GiveAwayCard = ({
             Claim Now
           </a>
         </footer>
-      </div>
+      </section>
     </article>
   );
 };

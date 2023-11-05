@@ -16,20 +16,16 @@ const Home = () => {
     6,
     "release-date"
   );
-  const { games: bestGames, getData: getDataBest } = useGames(6, "relevance");
+  const { games: popularGames, getData: getDataBest } = useGames(6, "popularity");
 
   const [isLoad, setIsLoad] = useState(false);
 
   useEffect(() => {
     const getGiveawaysData = async () => {
       try {
-        const steamGames = await getGiveAways("steam");
-        const epicGames = await getGiveAways("epic-games-store");
+        const obtainedGiveaways = await getGiveAways("pc");
 
-        setGiveaways({
-          steam: steamGames,
-          epic: epicGames,
-        });
+        setGiveaways(obtainedGiveaways);
 
         await getDataLatest();
         await getDataBest();
@@ -57,17 +53,17 @@ const Home = () => {
           id={latestGames[0].id}
         />
       )}
-      {giveaways.epic.length > 0 && (
-        <section className="flex gap-5 pb-6 pt-4 rounded-t-lg bg-slate-950 px-4">
-          <BigGiveAwayCard {...giveaways.epic[0]} />
-          <BigGiveAwayCard {...giveaways.epic[1]} />
+      {giveaways.length > 0 && (
+        <section className="flex gap-5 pb-6 pt-4 rounded-t-lg bg-gray-800 px-4">
+          <BigGiveAwayCard {...giveaways[0]} />
+          <BigGiveAwayCard {...giveaways[1]} />
         </section>
       )}
-      {giveaways.steam.length > 0 && (
-        <section className="flex justify-between pb-4 mb-8 rounded-b-lg bg-slate-950 px-4 shadow-lg shadow-slate-950">
-          <GiveAwayCard {...giveaways.steam[0]} />
-          <GiveAwayCard {...giveaways.steam[1]} />
-          <GiveAwayCard {...giveaways.steam[2]} />
+      {giveaways.length > 0 && (
+        <section className="flex justify-between pb-4 mb-8 rounded-b-lg bg-gray-800 px-4 shadow-lg shadow-slate-950">
+          <GiveAwayCard {...giveaways[2]} />
+          <GiveAwayCard {...giveaways[3]} />
+          <GiveAwayCard {...giveaways[4]} />
         </section>
       )}
       {latestGames.length > 0 && (
@@ -77,11 +73,11 @@ const Home = () => {
           title={"Latest Added Games"}
         />
       )}
-      {bestGames.length > 0 && (
+      {popularGames.length > 0 && (
         <GiveAwayContainer
           ChildrenComponent={GameCard}
-          games={bestGames}
-          title={"Best Free-to-play Games"}
+          games={popularGames}
+          title={"Popular Free-To-Play Games"}
           right
         />
       )}

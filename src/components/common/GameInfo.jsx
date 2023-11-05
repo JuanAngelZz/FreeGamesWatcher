@@ -17,7 +17,7 @@ const GameInfo = ({
         className="rounded-t-xl"
       />
       <div className="h-60 px-4 text-sm flex flex-col justify-evenly">
-        <p className="max-h-[100px] overflow-scroll">{short_description}</p>
+        <p className="max-h-[100px]">{short_description}</p>
         <div>
           <p>
             <span className="opacity-50 inline-block w-24 mr-2">

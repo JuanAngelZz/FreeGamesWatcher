@@ -64,10 +64,10 @@ const WeeklyGame = () => {
             href={open_giveaway_url}
             target="_blank"
             rel="noreferrer"
-            className="float-right bg-amber-500 text-slate-800 text-xl font-bold py-3 px-4 rounded hover:bg-amber-600"
+            className="float-right bg-amber-500 text-slate-800 text-lg font-bold py-3 px-4 rounded hover:bg-amber-600"
           >
-            <FaShoppingCart className="inline mr-2" />
             Claim Now
+            <FaShoppingCart className="inline ml-2" />
           </a>
         </div>
       </section>

@@ -8,7 +8,7 @@ const BigGiveAwayCard = ({
   worth,
   end_date,
 }) => {
-  let justDate = end_date.split(" ").shift();
+  let justDate = end_date?.split(" ").shift();
 
   return (
     <article

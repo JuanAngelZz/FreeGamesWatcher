@@ -9,8 +9,6 @@ import { PiPaperPlaneRightFill } from "react-icons/pi";
 import { BsFillCaretRightFill } from "react-icons/bs";
 import Loading from "../common/Loading";
 import { useGames } from "../../hooks/useGames";
-import GiveAwayContainer from "../common/GiveAwayContainer";
-import GameCard from "../common/GameCard";
 
 const Game = () => {
   let { id } = useParams();
@@ -31,7 +29,7 @@ const Game = () => {
     screenshots,
   } = useMemo(() => game, [game]);
 
-  const genreLc = genre ? [genre.toLowerCase()] : [];
+  const genreLc = genre ? [genre.toLowerCase().replace(' ', '-')] : [];
 
   const { games, getData, resetGames } = useGames(6, "relevance", genreLc);
 
@@ -51,7 +49,8 @@ const Game = () => {
   useEffect(() => {
     resetGames()
     getData()
-  }, [genre]);
+    console.log(genreLc)
+  }, [game]);
 
   const { os, processor, memory, graphics, storage } =
     minimum_system_requirements ?? {};
@@ -100,16 +99,6 @@ const Game = () => {
         processor={processor}
         storage={storage}
       />
-      <br />
-      <br />
-      <br />
-      {games.length > 0 ? (
-        <GiveAwayContainer
-          games={games}
-          title="Similar Games"
-          ChildrenComponent={GameCard}
-        />
-      ) : <Loading>uola</Loading>}
     </>
   ) : (
     <Loading>Loading...</Loading>
